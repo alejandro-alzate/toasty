@@ -29,7 +29,6 @@ local config = {
 	foregroundColor = { 1, 1, 1, 1 }
 }
 
-
 ---Checks if a given value is a valid color table
 ---@param color table? The object to check
 ---@return boolean valid Whether it's safe to use as a color value

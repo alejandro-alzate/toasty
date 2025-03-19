@@ -61,7 +61,5 @@ Just a simple toast notification "library" for LÖVE.
 - `toasty.setDefaultForeground(color)`: Sets the default foreground color used for notifications.
 - `toasty.getDefaultOutlineWidth()`: Returns the default outline width used for notifications.
 - `toasty.setDefaultOutlineWidth(width)`: Sets the default outline width used for notifications.
-
-Not implemented yet.
 - `toasty.getDefaultFont()`: Returns the default font used for notifications.
 - `toasty.setDefaultFont(font)`: Sets the default font used for notifications.

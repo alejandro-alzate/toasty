@@ -205,6 +205,27 @@ function toasty.setDefaultOutlineWidth(width)
 	end
 end
 
+---Returns the default font used to draw the toasts.
+---@return love.Font
+function toasty.getDefaultFont() return config.font end
+
+---Sets the default font used to draw the toasts.
+---@param font love.Font? The new default font. if not given, the default font will be set to the current font.
+---@return nil
+function toasty.setDefaultFont(font)
+	if type(font) ~= nil then
+		-- OMG Shut up I'm checking if the font is nil!
+		---@diagnostic disable-next-line: need-check-nil
+		if font:typeOf("Font") then
+			config.font = font
+		else
+			error("Font is not a valid Font object")
+		end
+	else
+		config.font = love.graphics.getFont()
+	end
+end
+
 -- LÖVE-Related Functions --
 
 ---Updates the internal state of all toasts on the toaster

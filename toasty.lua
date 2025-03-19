@@ -130,12 +130,14 @@ end
 
 ---Returns the given color name (Generic).
 ---@param varname string The name of the color to get.
----@return Color|table? The default background color name.
+---@return Color? The default background color name.
 function toasty.getColorName(varname)
+	---@diagnostic disable-next-line: param-type-mismatch
 	local valid, msg = checkColor(config[varname])
 	if not valid then
 		error(msg)
 	end
+	---@diagnostic disable-next-line: return-type-mismatch
 	return valid and config[varname] or nil
 end
 
@@ -220,7 +222,6 @@ function toasty.draw()
 	if firstToast then
 		-- Save the user graphics settings
 		love.graphics.push("all")
-		love.graphics.setFont(config.font)
 
 		---@type integer
 		local windowWidth = love.graphics.getWidth()
@@ -274,8 +275,11 @@ function toasty.draw()
 		love.graphics.setLineWidth(lastLineWidth)
 
 		-- Text
+		local lastFont = love.graphics.getFont()
+		love.graphics.setFont(config.font)
 		love.graphics.setColor(config.foregroundColor)
 		love.graphics.printf(text, x, y, limit, align, 0, size, size)
+		love.graphics.setFont(lastFont)
 
 		-- Revert user graphics settings to normal
 		love.graphics.pop()

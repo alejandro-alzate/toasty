@@ -147,6 +147,28 @@ function toasty.setDefaultBackgroundColor(color)
 	return toasty.setColor(color, "backgroundColor")
 end
 
+---Returns the default foreground color.
+---@return Color? color The default foreground color.
+function toasty.getDefaultForegroundColor() return toasty.getColorName("foregroundColor") end
+
+---Sets the default foreground color.
+---@param color Color? The new default foreground color.
+---@return nil
+function toasty.setDefaultForegroundColor(color)
+	return toasty.setColor(color, "foregroundColor")
+end
+
+---Returns the default outline color.
+---@return Color? color The default outline color.
+function toasty.getDefaultOutlineColor() return toasty.getColorName("outlineColor") end
+
+---Sets the default outline color.
+---@param color Color? The new default outline color.
+---@return nil
+function toasty.setDefaultOutlineColor(color)
+	return toasty.setColor(color, "outlineColor")
+end
+
 ---Clears the toaster of any toast.
 function toasty.clear()
 	for i, v in ipairs(toastQueue) do

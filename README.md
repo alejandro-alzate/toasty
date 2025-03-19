@@ -55,11 +55,11 @@ Just a simple toast notification "library" for LÖVE.
 - `toasty.setDefaultColor(color, name)`: Sets the default color used for notifications (Generic function).
 - `toasty.getDefaultBackgroundColor()`: Returns the default background color used for notifications.
 - `toasty.setDefaultBackgroundColor(color)`: Sets the default background color used for notifications.
+- `toasty.getDefaultOutlineColor()`: Returns the default outline color used for notifications.
+- `toasty.setDefaultOutlineColor(color)`: Sets the default outline color used for notifications.
+- `toasty.getDefaultForeground()`: Returns the default foreground color used for notifications.
+- `toasty.setDefaultForeground(color)`: Sets the default foreground color used for notifications.
 
 Not implemented yet.
-- `toasty.getDefaultOutlineColor()`
-- `toasty.setDefaultOutlineColor(color)`
 - `toasty.getDefaultOutlineWidth()`
 - `toasty.setDefaultOutlineWidth(width)`
-- `toasty.getDefaultForeground()`
-- `toasty.setDefaultForeground(color)`

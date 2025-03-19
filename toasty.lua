@@ -23,11 +23,14 @@ local defaultToast = {
 }
 
 local config = {
+	outlineWidth = 2,
 	font = love.graphics.getFont(),
 	backgroundColor = { 0, 0, 0, 0.7 },
 	outlineColor = { 1, 1, 1, 1 },
 	foregroundColor = { 1, 1, 1, 1 }
 }
+
+-- Helper Functions --
 
 ---Checks if a given value is a valid color table
 ---@param color table? The object to check
@@ -58,6 +61,8 @@ local function checkColor(color)
 	return valid, nil
 end
 
+-- Internal Functions --
+
 ---Updates the internal state of a toast
 ---@param self Toast
 ---@param dt number
@@ -84,6 +89,15 @@ function toasty.pump(self, dt)
 	end
 end
 
+-- Toasty related API --
+
+---Clears the toaster of any toast.
+function toasty.clear()
+	for i, v in ipairs(toastQueue) do
+		table.remove(toastQueue, i)
+	end
+end
+
 ---Adds a new Toast to the toaster queue.
 ---@param text string The text to display on the toast
 ---@param duration number The duration of the toast in seconds
@@ -97,6 +111,8 @@ function toasty.notify(text, duration, prioritize)
 	}
 	table.insert(toastQueue, prioritize and 1 or #toastQueue + 1, toast)
 end
+
+-- Setters/Getters --
 
 ---Returns the default text shown when no user text is provided.
 ---@return string The default text
@@ -169,12 +185,25 @@ function toasty.setDefaultOutlineColor(color)
 	return toasty.setColor(color, "outlineColor")
 end
 
----Clears the toaster of any toast.
-function toasty.clear()
-	for i, v in ipairs(toastQueue) do
-		table.remove(toastQueue, i)
+---Returns the default outline width.
+---@return number? width The default outline width.
+function toasty.getDefaultOutlineWidth() return config.outlineWidth end
+
+---Sets the default outline width.
+---@param width number? The new default outline width.
+---@return nil
+function toasty.setDefaultOutlineWidth(width)
+	if type(width) == "number" then
+		if width < 0 then
+			error("Outline width cannot be negative")
+		end
+		config.outlineWidth = width
+	else
+		error("Outline width is not a number, got: " .. type(width))
 	end
 end
+
+-- LÖVE-Related Functions --
 
 ---Updates the internal state of all toasts on the toaster
 ---@param dt number
@@ -238,8 +267,11 @@ function toasty.draw()
 		love.graphics.rectangle("fill", recX, recY, recWidth, recHeight, radiusX, radiusY)
 
 		-- Outline Box
+		local lastLineWidth = love.graphics.getLineWidth()
+		love.graphics.setLineWidth(config.outlineWidth)
 		love.graphics.setColor(config.outlineColor)
 		love.graphics.rectangle("line", recX, recY, recWidth, recHeight, radiusX, radiusY)
+		love.graphics.setLineWidth(lastLineWidth)
 
 		-- Text
 		love.graphics.setColor(config.foregroundColor)
